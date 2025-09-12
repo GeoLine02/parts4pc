@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import Header from "@/components/Header";
 import { Orbitron } from "next/font/google";
 export const orbitron = Orbitron({
