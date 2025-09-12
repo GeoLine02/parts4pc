@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "@/components/Header";
+import { Orbitron } from "next/font/google";
+export const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Parts4PC",
@@ -14,7 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-w-screen flex flex-col bg-jetBlack">
+        <Header />
         <main>{children}</main>
       </body>
     </html>
