@@ -3,6 +3,8 @@ import Logo from "./Logo";
 import Button from "./ui/Button";
 
 const Header = () => {
+  const token = true;
+
   return (
     <header className="bg-jetBlack text-warmGray font-orbitron container py-4">
       <nav className="flex items-center justify-between">
@@ -27,9 +29,7 @@ const Header = () => {
             Shop
           </Link>
         </ul>
-        <Button variant={"outline"}>
-          <Button.Label>Sign In</Button.Label>
-        </Button>
+        {token && <Button variant="primary">Sign in</Button>}
       </nav>
     </header>
   );
