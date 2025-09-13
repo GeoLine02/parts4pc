@@ -20,7 +20,7 @@ const ProductCard = ({
   productImage,
 }: ProductCardProps) => {
   return (
-    <Card className="group rounded-xl bg-darkGray shadow-md hover:shadow-lg flex flex-col w-full max-w-64">
+    <Card className="group rounded-xl bg-darkGray shadow-md hover:shadow-lg flex flex-col w-full  max-w-44 md:max-w-64">
       {/* Image */}
       <div className="relative w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl">
         <Image
@@ -43,11 +43,14 @@ const ProductCard = ({
         </p>
 
         {/* Price & Action */}
-        <div className="mt-3 flex items-center justify-between">
+        <div className="mt-1 flex flex-col space-y-2 md:space-y-0 md:flex-row md:items-center justify-between">
           <span className="text-xl font-bold text-green-600">
             ${productPrice.toFixed(2)}
           </span>
-          <Button className="flex items-center gap-2" variant="primary">
+          <Button
+            className="flex items-center justify-center gap-2 w-full md:w-auto"
+            variant="primary"
+          >
             View Details
           </Button>
         </div>

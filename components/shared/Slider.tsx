@@ -4,6 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { cn } from "@/utils/cn";
 // import { ArrowLeft, ArrowRight } from "lucide-react";
 import "swiper/css";
+import { Navigation } from "swiper/modules";
+import { useRef } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 // interface SliderButtonProps {
 //   direction: "left" | "right";
@@ -19,17 +22,65 @@ import "swiper/css";
 interface SliderProps<T> {
   data: T[];
   renderComponent: (item: T) => React.ReactNode;
+  sectionTitle: string;
 }
 
-const Slider = <T,>({ data, renderComponent }: SliderProps<T>) => {
+const Slider = <T,>({
+  data,
+  sectionTitle,
+  renderComponent,
+}: SliderProps<T>) => {
+  const prevRef = useRef<HTMLDivElement | null>(null);
+  const nextRef = useRef<HTMLDivElement | null>(null);
+
   return (
-    <Swiper pagination={false} modules={[]}>
-      {data.map((item, index) => (
-        <SwiperSlide className={cn("max-w-fit ml-4")} key={index}>
-          {renderComponent(item)}
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <section>
+      <div className="flex justify-between items-center w-full mb-4">
+        <h1 className={`text-2xl font-orbitron text-warmGray`}>
+          {sectionTitle}
+        </h1>
+        <div className="flex gap-4 items-center">
+          <div
+            ref={prevRef}
+            className="cursor-pointer border-2 text-deepRed border-deepRed rounded-md p-1"
+          >
+            <ArrowLeft size={25} />
+          </div>
+          <div
+            ref={nextRef}
+            className="cursor-pointer border-2 text-deepRed border-deepRed rounded-md p-1"
+          >
+            <ArrowRight size={25} />
+          </div>
+        </div>
+      </div>
+
+      <Swiper
+        modules={[Navigation]}
+        slidesPerView="auto"
+        draggable={true}
+        spaceBetween={20}
+        navigation={{
+          prevEl: prevRef.current,
+          nextEl: nextRef.current,
+        }}
+        onBeforeInit={(swiper) => {
+          if (
+            swiper.params.navigation &&
+            typeof swiper.params.navigation !== "boolean"
+          ) {
+            swiper.params.navigation.prevEl = prevRef.current;
+            swiper.params.navigation.nextEl = nextRef.current;
+          }
+        }}
+      >
+        {data.map((item, idx) => (
+          <SwiperSlide className={cn("max-w-fit")} key={idx}>
+            {renderComponent(item)}
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
   );
 };
 
