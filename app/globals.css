@@ -9,21 +9,6 @@
 /* bg-jetBlack text-paleRed accent-crimsonRed hover:accent-deepRed *
 /* --------------------------------------------------- */
 
-@layer base {
-  .font-orbitron {
-    @apply font-sans;
-    font-family: "Orbitron", sans-serif;
-  }
-  .font-exo2 {
-    @apply font-sans;
-    font-family: "Exo 2", sans-serif;
-  }
-  .font-teko {
-    @apply font-sans;
-    font-family: "Teko", sans-serif;
-  }
-}
-
 .container {
   @apply max-w-[1440px] mx-auto px-4;
 }
@@ -40,6 +25,9 @@
   --color-deepRed: #b91c1c;
   --color-paleRed: #fee2e2;
   --color-warmGray: #f5f5f5;
+
+  /* fonts */
+  --font-orbitron: "Orbitron", sans-serif;
 }
 
 /* 
@@ -52,10 +40,10 @@
   warmGray:   "#F5F5F5", // Text on dark bg
 } */
 
-button {
-  cursor: pointer;
+body {
+  @apply min-w-screen flex flex-col bg-jetBlack;
 }
 
-.sipwer-wrapper {
-  padding: 0 0;
+button {
+  cursor: pointer;
 }
