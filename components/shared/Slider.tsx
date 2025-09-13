@@ -42,13 +42,13 @@ const Slider = <T,>({
         <div className="flex gap-4 items-center">
           <div
             ref={prevRef}
-            className="cursor-pointer border-2 text-deepRed border-deepRed rounded-md p-1"
+            className="cursor-pointer border-2 text-deepRed border-deepRed rounded-md p-1 hover:text-darkGray hover:bg-deepRed hover-transition"
           >
             <ArrowLeft size={25} />
           </div>
           <div
             ref={nextRef}
-            className="cursor-pointer border-2 text-deepRed border-deepRed rounded-md p-1"
+            className="cursor-pointer border-2 text-deepRed border-deepRed rounded-md p-1 hover:text-darkGray hover:bg-deepRed hover-transtion"
           >
             <ArrowRight size={25} />
           </div>

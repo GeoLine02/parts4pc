@@ -1,15 +1,28 @@
+"use client";
+
 import Link from "next/link";
 import Logo from "./Logo";
 import Button from "./ui/Button";
+import { Menu } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { toggleSideBar } from "@/store/features/sideBarSlice";
 
 const Header = () => {
   const token = true;
+  const dispatch = useDispatch();
+
+  const onOpenMenu = () => {
+    dispatch(toggleSideBar());
+  };
 
   return (
     <header className="bg-jetBlack text-warmGray font-orbitron container py-4">
       <nav className="flex items-center justify-between">
+        <div className="md:hidden">
+          <Menu onClick={onOpenMenu} className="hover:text-deepRed" size={25} />
+        </div>
         <Logo />
-        <ul className="w-full flex items-center justify-between mx-auto max-w-[900px]">
+        <ul className="w-full hidden items-center justify-between mx-auto max-w-[900px] md:flex">
           <Link className="hover-transition hover:text-deepRed" href={"/parts"}>
             PC Parts
           </Link>

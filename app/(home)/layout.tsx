@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import "../globals.css";
 import Header from "@/components/Header";
 import { Orbitron } from "next/font/google";
-export const orbitron = Orbitron({
+import SideMenu from "@/components/shared/SideMenu";
+import StoreProvider from "@/providers/ReduxProvider";
+const orbitron = Orbitron({
   subsets: ["latin"],
   weight: ["600", "700"],
 });
@@ -20,9 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-w-screen flex flex-col bg-jetBlack">
-        <Header />
-        <main>{children}</main>
+      <body className={orbitron.style.fontFamily}>
+        <StoreProvider>
+          <div>
+            <Header />
+            <SideMenu />
+          </div>
+          <main>{children}</main>
+        </StoreProvider>
       </body>
     </html>
   );
