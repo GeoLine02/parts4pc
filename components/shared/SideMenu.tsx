@@ -43,7 +43,7 @@ const SideMenu = () => {
           className="p-2 hover:bg-darkGray hover-transition"
           href={"/prebuilds"}
         >
-          Prebuild PC's
+          Prebuild PC&apos;s
         </Link>
         <Link
           className="p-2 hover:bg-darkGray hover-transition"
