@@ -24,10 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={orbitron.style.fontFamily}>
         <StoreProvider>
-          <div>
-            <Header />
-            <SideMenu />
-          </div>
+          <Header />
+          <SideMenu />
+
           <main>{children}</main>
         </StoreProvider>
       </body>

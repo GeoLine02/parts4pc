@@ -23,7 +23,7 @@ const SideMenu = () => {
 
   return (
     <div
-      className={`${sideMenuToggleStyles} w-full max-w-[250px] bg-jetBlack border-r border-r-darkGray min-h-screen p-4 font-orbitron md:hidden`}
+      className={`${sideMenuToggleStyles} w-full max-w-[250px] bg-jetBlack border-r border-r-darkGray min-h-screen p-4 font-orbitron md:hidden text-sm`}
     >
       <div className="flex justify-end">
         <X
@@ -53,6 +53,18 @@ const SideMenu = () => {
         </Link>
         <Link className="p-2 hover:bg-darkGray hover-transition" href={"/shop"}>
           Shop
+        </Link>
+        <Link
+          className="p-2 hover:bg-darkGray hover-transition"
+          href={"/signin"}
+        >
+          Sign In
+        </Link>
+        <Link
+          className="p-2 hover:bg-darkGray hover-transition"
+          href={"/signup"}
+        >
+          Sign Up
         </Link>
       </div>
     </div>
