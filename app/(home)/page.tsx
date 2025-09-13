@@ -6,8 +6,8 @@ import Banner from "./components/banner/Banner";
 
 export default function Home() {
   return (
-    <div className="container justify-center flex flex-col gap-14">
-      {/* <Banner /> */}
+    <div className="container justify-center flex flex-col gap-6 md:gap-11">
+      <Banner />
       <ProuductFilter />
       <VIpProducts />
     </div>
