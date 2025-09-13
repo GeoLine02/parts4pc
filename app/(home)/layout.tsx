@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-w-screen flex flex-col bg-jetBlack">
-        {/* <Header /> */}
+        <Header />
         <main>{children}</main>
       </body>
     </html>
