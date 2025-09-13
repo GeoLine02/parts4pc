@@ -16,8 +16,8 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-jetBlack text-warmGray font-orbitron container py-4">
-      <nav className="flex items-center justify-between">
+    <header className="bg-jetBlack text-warmGray font-orbitron container py-4 w-[75%] !mx-0 md:w-full md:!mx-auto px-4">
+      <nav className="flex items-center justify-between w-full">
         <div className="md:hidden">
           <Menu onClick={onOpenMenu} className="hover:text-deepRed" size={25} />
         </div>
@@ -42,7 +42,11 @@ const Header = () => {
             Shop
           </Link>
         </ul>
-        {token && <Button variant="primary">Sign in</Button>}
+        {token && (
+          <Button className="hidden md:block" variant="primary">
+            Sign in
+          </Button>
+        )}
       </nav>
     </header>
   );
