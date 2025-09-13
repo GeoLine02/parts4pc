@@ -41,7 +41,7 @@
 } */
 
 body {
-  @apply min-w-screen flex flex-col bg-jetBlack;
+  @apply min-h-screen flex flex-col bg-jetBlack;
 }
 
 button {

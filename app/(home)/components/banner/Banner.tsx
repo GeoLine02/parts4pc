@@ -4,33 +4,33 @@
 // import BannerImage from "@/public/images/graphics-card-banner.png";
 import { Swiper } from "swiper/react";
 import { SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/pagination";
-// import {} from ""
 const Banner = () => {
   return (
     <Swiper
-      className="w-full  h-[400px]"
+      className="w-full"
       slidesPerView={1}
-      pagination={true}
-      autoplay={true}
-      modules={[Pagination]}
+      pagination={{ clickable: true }}
+      loop={true}
+      autoplay={{
+        delay: 4000,
+        disableOnInteraction: true,
+      }}
+      modules={[Pagination, Autoplay]}
     >
       <SwiperSlide>
-        <div>
-          <span className="text-7xl font-semibold flex items-center justify-center bg-darkGray text-warmGray">
-            1
-          </span>
-        </div>
+        <span className="text-7xl font-semibold flex items-center justify-center bg-darkGray text-warmGray h-[250px] md:h-[400px]">
+          1
+        </span>
       </SwiperSlide>
       <SwiperSlide>
-        <span className="text-7xl font-semibold flex items-center justify-center bg-darkGray text-warmGray">
+        <span className="text-7xl font-semibold flex items-center justify-center bg-darkGray text-warmGray h-[250px] md:h-[400px]">
           2
         </span>
       </SwiperSlide>
       <SwiperSlide>
-        <span className="text-7xl font-semibold flex items-center justify-center bg-darkGray text-warmGray">
+        <span className="text-7xl font-semibold flex items-center justify-center bg-darkGray text-warmGray h-[250px] md:h-[400px]">
           3
         </span>
       </SwiperSlide>
