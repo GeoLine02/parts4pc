@@ -40,10 +40,6 @@
   warmGray:   "#F5F5F5", // Text on dark bg
 } */
 
-body {
-  @apply min-h-screen flex flex-col bg-jetBlack;
-}
-
 button {
   cursor: pointer;
 }
