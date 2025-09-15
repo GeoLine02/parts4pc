@@ -1,5 +1,5 @@
 import sequelize from "./sequelize";
-import "@/models/User";
+import "@/models/user";
 
 export const initDb = async () => {
   try {

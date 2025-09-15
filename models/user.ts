@@ -1,4 +1,4 @@
-import { DataTypes, DATE, Model, Optional } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "@/lib/sequelize";
 
 // Type definitions for TS
@@ -11,7 +11,7 @@ interface UserAttributes {
   password: string;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
+type UserCreationAttributes = Optional<UserAttributes, "id">;
 
 export class User
   extends Model<UserAttributes, UserCreationAttributes>
