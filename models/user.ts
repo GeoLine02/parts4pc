@@ -23,7 +23,6 @@ export class User
   public email!: string;
   public password!: string;
   public phone!: string;
-
   // timestamps
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
