@@ -6,14 +6,20 @@ import Button from "./ui/Button";
 import { Menu } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { toggleSideBar } from "@/store/features/sideBarSlice";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const token = true;
   const dispatch = useDispatch();
+  const pathName = usePathname();
 
   const onOpenMenu = () => {
     dispatch(toggleSideBar());
   };
+
+  if (pathName.includes("signin") || pathName.includes("signup")) {
+    return null;
+  }
 
   return (
     <header className="bg-jetBlack text-warmGray font-orbitron container py-4 w-[75%] !mx-0 md:w-full md:!mx-auto px-4">
@@ -43,9 +49,11 @@ const Header = () => {
           </Link>
         </ul>
         {token && (
-          <Button className="hidden md:block" variant="primary">
-            Sign in
-          </Button>
+          <Link href="/signin">
+            <Button className="hidden md:block" variant="primary">
+              Sign in
+            </Button>
+          </Link>
         )}
       </nav>
     </header>

@@ -1,7 +1,7 @@
 // import Banner from "./components/banner/Banner";
 
 import VIpProducts from "./components/vipProducts/VIpProducts";
-import ProuductFilter from "../../components/shared/filter/ProductFilter";
+import ProuductFilter from "../../components/shared/ProductFilter";
 import Banner from "./components/banner/Banner";
 
 export default function Home() {
