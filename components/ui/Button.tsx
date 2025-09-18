@@ -2,9 +2,9 @@
 
 import { cn } from "@/utils/cn";
 import { cva } from "class-variance-authority";
-import { HTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
 }
 

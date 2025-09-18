@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+import "server-only";
 import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize(
@@ -8,7 +10,8 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST || "localhost",
     dialect: "postgres",
     port: Number(process.env.DB_PORT) || 5432,
-    logging: false,
+    logging: true,
+    dialectModule: require("pg"),
   }
 );
 
