@@ -1,77 +1,91 @@
 "use server";
 
-import { initDb } from "@/lib/initDb";
-import { createAccessToken, createRefreshToken } from "@/lib/jwt";
-import User from "@/models/user";
-import { registerSchema } from "@/schemas/authSchema";
-import { entityValidator } from "@/utils/entityValidator";
-import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
-import { serialize } from "cookie";
-import sequelize from "@/lib/sequelize";
+import bcrypt from "bcrypt";
+import { registerSchema } from "@/schemas/authSchema";
+import db from "@/models";
+import User from "@/models/user";
+import { createAccessToken } from "@/lib/jwt";
+import { cookies } from "next/headers";
 
-export const POST = async (req: Request) => {
+export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const { isValid, errors } = await entityValidator(registerSchema, body);
-    if (!isValid)
+    // ✅ run validation
+    const parsed = registerSchema.safeParse(body);
+    if (!parsed.success) {
       return NextResponse.json(
-        { message: "Bad request", errors },
+        { errors: parsed.error.flatten().fieldErrors },
         { status: 400 }
       );
-    await sequelize.authenticate();
-    await initDb();
+    }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(body.password, 10);
-    console.log("isValid: ", isValid);
-    // Create user
+    const { email, firstName, lastName, phone, password } = parsed.data;
+
+    await db.sequelize.authenticate();
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const existedEmail = await User.findOne({
+      where: { email },
+    });
+
+    if (existedEmail) {
+      return NextResponse.json({
+        status: 400,
+        error: "User with this email already exists",
+        field: "email",
+      });
+    }
+
+    const existedPhone = await User.findOne({
+      where: { phone },
+    });
+
+    if (existedPhone) {
+      return NextResponse.json({
+        status: 400,
+        error: "User with this phone already exists",
+        field: "phone",
+      });
+    }
+
     const user = await User.create({
-      email: body.email,
-      phone: body.phone,
-      firstName: body.firstName,
-      lastName: body.lastName,
+      email,
+      phone,
+      firstName,
+      lastName,
       password: hashedPassword,
     });
 
-    // Generate tokens
     const accessToken = createAccessToken({ id: user.id });
-    const refreshToken = createRefreshToken({ id: user.id });
 
-    // Create cookies
-    const accessCookie = serialize("accessToken", accessToken, {
+    const cookieStore = await cookies();
+
+    cookieStore.set("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       path: "/",
-      sameSite: "none",
-      maxAge: 15 * 60, // 15 minutes
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60, // 1 week
     });
-
-    const refreshCookie = serialize("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-      sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60, // 7 days
-    });
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password: _, ...userData } = user.get({ plain: true });
 
     const response = NextResponse.json({
       message: "User registered successfully",
-      user: userData,
+      status: 200,
     });
 
-    // Set both cookies
-    response.headers.append("Set-Cookie", accessCookie);
-    response.headers.append("Set-Cookie", refreshCookie);
-
     return response;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    console.error("Registration error:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    console.error(error);
+
+    return NextResponse.json(
+      {
+        error,
+        status: 500,
+      },
+      { status: 500 }
+    );
   }
-};
+}
