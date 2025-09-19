@@ -2,39 +2,46 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("Products", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
+      productName: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      lastName: {
+      productDescription: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      productCondition: {
+        type: Sequelize.ENUM("new", "used"),
+        allowNull: false,
+      },
+      productPrice: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      productQuantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      productCategory: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
+      productOwnerId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
-      },
-      status: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: "memeber",
-      },
-      phone: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        references: {
+          model: "Users", // refers to table name
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE", // if a user is deleted, delete their products
       },
       createdAt: {
         allowNull: false,
@@ -46,7 +53,8 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface) {
-    await queryInterface.dropTable("Users");
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("Products");
   },
 };
