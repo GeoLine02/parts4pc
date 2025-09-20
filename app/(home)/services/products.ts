@@ -3,7 +3,7 @@ import { ProductCardType } from "@/types/product";
 export const fetchVipProducts = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/vip-products`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products/vip-products`,
       {
         method: "GET",
         headers: {

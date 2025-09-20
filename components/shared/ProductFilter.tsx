@@ -7,6 +7,7 @@ import { Navigation, FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
+import { ProductCategoryType } from "@/types/productCategories";
 
 interface FilterCardProps {
   filterImage: StaticImageData;
@@ -26,7 +27,11 @@ const FilterCard = ({ filterImage, label }: FilterCardProps) => {
   );
 };
 
-const ProductFilter = () => {
+interface ProductFilterProps {
+  productCategoriesData: ProductCategoryType[];
+}
+
+const ProductFilter = ({ productCategoriesData }: ProductFilterProps) => {
   return (
     <div className="w-full">
       <Swiper
