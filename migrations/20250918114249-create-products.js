@@ -29,9 +29,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      productCategory: {
-        type: Sequelize.STRING,
+      productCategoryId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "ProductCategories",
+          key: "categoryId",
+        },
+        onUpdate: "CASCADE",
       },
       productOwnerId: {
         type: Sequelize.INTEGER,

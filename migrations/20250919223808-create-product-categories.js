@@ -9,11 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      categoryName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
       categoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,

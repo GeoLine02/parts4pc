@@ -1,7 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "@/lib/sequelize";
+import { ProductCategories } from "./productcategories";
 
-// Type definitions for TS
 interface ProductAttributes {
   id: number;
   productName: string;
@@ -9,14 +9,14 @@ interface ProductAttributes {
   productPrice: number;
   productQuantity: number;
   productCondition: "new" | "used";
-  productCategory: string;
   productOwnerId: number;
+  productCategoryId: number;
 }
 
-type UserCreationAttributes = Optional<ProductAttributes, "id">;
+type ProductCreationAttributes = Optional<ProductAttributes, "id">;
 
 export class Products
-  extends Model<ProductAttributes, UserCreationAttributes>
+  extends Model<ProductAttributes, ProductCreationAttributes>
   implements ProductAttributes
 {
   public id!: number;
@@ -25,8 +25,8 @@ export class Products
   public productPrice!: number;
   public productQuantity!: number;
   public productCondition!: "new" | "used";
-  public productCategory!: string;
   public productOwnerId!: number;
+  public productCategoryId!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -58,19 +58,18 @@ Products.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    productCategory: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     productOwnerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    productCategoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: "Users",
+        model: "ProductCategories",
         key: "id",
       },
       onUpdate: "CASCADE",
-      onDelete: "CASCADE",
     },
   },
   {
@@ -79,5 +78,16 @@ Products.init(
     modelName: "Products",
   }
 );
+
+// ✅ Association
+ProductCategories.hasMany(Products, {
+  foreignKey: "productCategoryId",
+  as: "products",
+});
+
+Products.belongsTo(ProductCategories, {
+  foreignKey: "productCategoryId",
+  as: "category",
+});
 
 export default Products;

@@ -8,7 +8,7 @@ export default async function Home() {
   const vipProductsData = await fetchVipProducts();
 
   const productCategoriesData = await fetchProductCategories();
-  console.log("productCategoriesData", productCategoriesData);
+
   return (
     <div className="container justify-center flex flex-col gap-6 md:gap-11">
       <Banner />
