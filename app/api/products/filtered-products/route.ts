@@ -16,7 +16,7 @@ export async function GET(req: Request) {
       include: {
         model: ProductCategories,
         as: "category",
-        where: { categoryId },
+        where: { id: categoryId },
       },
       limit,
       offset,

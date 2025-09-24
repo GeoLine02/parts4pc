@@ -1,10 +1,9 @@
-import { DataTypes, Model } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import sequelize from "@/lib/sequelize";
 
-interface ProductCategoriesAttributes {
+export interface ProductCategoriesAttributes {
   id: number;
   categoryName: string;
-  categoryId: number;
 }
 
 export class ProductCategories
@@ -13,9 +12,8 @@ export class ProductCategories
 {
   public id!: number;
   public categoryName!: string;
-  public categoryId!: number;
   public readonly createdAt!: Date;
-  public readonly upadtedAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 ProductCategories.init(
@@ -29,10 +27,6 @@ ProductCategories.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-    },
-    categoryId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
   },
   {

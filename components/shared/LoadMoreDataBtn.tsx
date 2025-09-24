@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "../ui/Button";
-
+import { ClipLoader } from "react-spinners";
 interface LoadMoreDataBtnProps {
   fetchMoreProducts: () => Promise<void>;
   isLoading: boolean;
@@ -14,7 +14,7 @@ const LoadMoreDataBtn = ({
   return (
     <div className="flex justify-center mt-6">
       <Button onClick={fetchMoreProducts} variant="primary">
-        {isLoading ? "Loading..." : "Load 30 More"}
+        {isLoading ? <ClipLoader /> : "Load More Products"}
       </Button>
     </div>
   );

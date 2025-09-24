@@ -13,13 +13,13 @@ import Link from "next/link";
 interface FilterCardProps {
   filterImage: StaticImageData;
   label: string;
-  categoryId: number;
+  id: number;
 }
 
-const FilterCard = ({ filterImage, label, categoryId }: FilterCardProps) => {
+const FilterCard = ({ filterImage, label, id }: FilterCardProps) => {
   return (
     <Link
-      href={`/category/${label}-${categoryId}`}
+      href={`/category/${label}-${id}`}
       className="w-[225px] min-w-[225px] rounded-md bg-darkGray flex items-center gap-4 justify-center cursor-pointer p-4"
     >
       <Image
@@ -48,12 +48,12 @@ const ProductFilter = ({ productCategoriesData }: ProductFilterProps) => {
         modules={[Navigation, FreeMode]}
         className="w-full"
       >
-        {productCategoriesData.map((category) => (
+        {productCategoriesData?.map((category) => (
           <SwiperSlide key={category.id} className="!w-auto">
             <FilterCard
               label={category.categoryName}
               filterImage={MouseImage}
-              categoryId={category.categoryId}
+              id={category.id}
             />
           </SwiperSlide>
         ))}

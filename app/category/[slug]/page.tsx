@@ -7,8 +7,6 @@ interface FilteredProductsProps {
   }>;
 }
 const FilteredProducts = async ({ params }: FilteredProductsProps) => {
-  // const categoryId = (await params).id;
-
   const [label, id] = (await params).slug.split("-");
   console.log(label, id);
   const filteredProductsData = await fetchFilteredProducts(parseInt(id));

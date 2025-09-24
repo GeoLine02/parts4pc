@@ -1,11 +1,11 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { Model, DataTypes, Optional } from "sequelize";
 import sequelize from "@/lib/sequelize";
 import { ProductCategories } from "./productcategories";
 
 interface ProductAttributes {
   id: number;
   productName: string;
-  productDescription: string;
+  productDescription?: string;
   productPrice: number;
   productQuantity: number;
   productCondition: "new" | "used";
@@ -13,7 +13,10 @@ interface ProductAttributes {
   productCategoryId: number;
 }
 
-type ProductCreationAttributes = Optional<ProductAttributes, "id">;
+type ProductCreationAttributes = Optional<
+  ProductAttributes,
+  "id" | "productDescription"
+>;
 
 export class Products
   extends Model<ProductAttributes, ProductCreationAttributes>
@@ -21,7 +24,7 @@ export class Products
 {
   public id!: number;
   public productName!: string;
-  public productDescription!: string;
+  public productDescription?: string;
   public productPrice!: number;
   public productQuantity!: number;
   public productCondition!: "new" | "used";
@@ -67,9 +70,10 @@ Products.init(
       allowNull: false,
       references: {
         model: "ProductCategories",
-        key: "id",
+        key: "id", // ✅ primary key reference
       },
       onUpdate: "CASCADE",
+      onDelete: "SET NULL",
     },
   },
   {
@@ -79,12 +83,11 @@ Products.init(
   }
 );
 
-// ✅ Association
+// Associations
 ProductCategories.hasMany(Products, {
   foreignKey: "productCategoryId",
   as: "products",
 });
-
 Products.belongsTo(ProductCategories, {
   foreignKey: "productCategoryId",
   as: "category",
