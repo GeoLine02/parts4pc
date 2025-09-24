@@ -22,6 +22,11 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: "memeber",
+      },
       phone: {
         type: Sequelize.STRING,
         allowNull: false,

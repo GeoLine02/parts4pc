@@ -57,6 +57,7 @@ export async function POST(req: Request) {
       firstName,
       lastName,
       password: hashedPassword,
+      status: "member",
     });
 
     const accessToken = createAccessToken({ id: user.id });
