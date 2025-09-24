@@ -19,7 +19,7 @@ interface FilterCardProps {
 const FilterCard = ({ filterImage, label, categoryId }: FilterCardProps) => {
   return (
     <Link
-      href={`/category/${categoryId}`}
+      href={`/category/${label}-${categoryId}`}
       className="w-[225px] min-w-[225px] rounded-md bg-darkGray flex items-center gap-4 justify-center cursor-pointer p-4"
     >
       <Image
@@ -51,9 +51,9 @@ const ProductFilter = ({ productCategoriesData }: ProductFilterProps) => {
         {productCategoriesData.map((category) => (
           <SwiperSlide key={category.id} className="!w-auto">
             <FilterCard
-              categoryId={category.categoryId}
               label={category.categoryName}
               filterImage={MouseImage}
+              categoryId={category.categoryId}
             />
           </SwiperSlide>
         ))}
