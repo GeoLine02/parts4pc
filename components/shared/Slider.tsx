@@ -74,7 +74,7 @@ const Slider = <T,>({
           }
         }}
       >
-        {data.map((item, idx) => (
+        {data?.map((item, idx) => (
           <SwiperSlide className={cn("max-w-fit")} key={idx}>
             {renderComponent(item)}
           </SwiperSlide>

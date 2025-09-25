@@ -7,26 +7,36 @@ import { Navigation, FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
+import { ProductCategoryType } from "@/types/productCategories";
+import Link from "next/link";
 
 interface FilterCardProps {
   filterImage: StaticImageData;
   label: string;
+  id: number;
 }
 
-const FilterCard = ({ filterImage, label }: FilterCardProps) => {
+const FilterCard = ({ filterImage, label, id }: FilterCardProps) => {
   return (
-    <div className="w-[225px] min-w-[225px] rounded-md bg-darkGray flex items-center gap-4 justify-center cursor-pointer p-4">
+    <Link
+      href={`/category/${label}-${id}`}
+      className="w-[225px] min-w-[225px] rounded-md bg-darkGray flex items-center gap-4 justify-center cursor-pointer p-4"
+    >
       <Image
         alt={`filter products by ${label}`}
         src={filterImage}
         height={70}
       />
       <span className="text-warmGray text-lg font-semibold">{label}</span>
-    </div>
+    </Link>
   );
 };
 
-const ProductFilter = () => {
+interface ProductFilterProps {
+  productCategoriesData: ProductCategoryType[];
+}
+
+const ProductFilter = ({ productCategoriesData }: ProductFilterProps) => {
   return (
     <div className="w-full">
       <Swiper
@@ -38,36 +48,15 @@ const ProductFilter = () => {
         modules={[Navigation, FreeMode]}
         className="w-full"
       >
-        <SwiperSlide className="!w-auto">
-          <FilterCard label="Mice" filterImage={MouseImage} />
-        </SwiperSlide>
-        <SwiperSlide className="!w-auto">
-          <FilterCard label="Keyboards" filterImage={MouseImage} />
-        </SwiperSlide>
-        <SwiperSlide className="!w-auto">
-          <FilterCard label="Headsets" filterImage={MouseImage} />
-        </SwiperSlide>
-        <SwiperSlide className="!w-auto">
-          <FilterCard label="Monitors" filterImage={MouseImage} />
-        </SwiperSlide>
-        <SwiperSlide className="!w-auto">
-          <FilterCard label="Controllers" filterImage={MouseImage} />
-        </SwiperSlide>
-        <SwiperSlide className="!w-auto">
-          <FilterCard label="Controllers" filterImage={MouseImage} />
-        </SwiperSlide>
-        <SwiperSlide className="!w-auto">
-          <FilterCard label="Controllers" filterImage={MouseImage} />
-        </SwiperSlide>
-        <SwiperSlide className="!w-auto">
-          <FilterCard label="Controllers" filterImage={MouseImage} />
-        </SwiperSlide>
-        <SwiperSlide className="!w-auto">
-          <FilterCard label="Controllers" filterImage={MouseImage} />
-        </SwiperSlide>
-        <SwiperSlide className="!w-auto">
-          <FilterCard label="Controllers" filterImage={MouseImage} />
-        </SwiperSlide>
+        {productCategoriesData?.map((category) => (
+          <SwiperSlide key={category.id} className="!w-auto">
+            <FilterCard
+              label={category.categoryName}
+              filterImage={MouseImage}
+              id={category.id}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
