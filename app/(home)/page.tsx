@@ -13,7 +13,7 @@ export default async function Home() {
     <div className="container justify-center flex flex-col gap-6 md:gap-11">
       <Banner />
       <ProuductFilter productCategoriesData={productCategoriesData} />
-      <VIpProducts vipProductsData={vipProductsData} />
+      {/* <VIpProducts vipProductsData={vipProductsData} /> */}
     </div>
   );
 }
