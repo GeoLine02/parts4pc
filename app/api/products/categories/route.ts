@@ -15,6 +15,7 @@ export async function GET() {
     console.log(error);
     return NextResponse.json(
       {
+        message: error,
         error: "Failed to fetch product categories",
       },
       {
