@@ -8,9 +8,9 @@ export const getAuthUser = async () => {
     if (token) {
       const res = await fetch(
         `${
-          process.env.NODE_ENV === "development"
-            ? process.env.NEXT_PUBLIC_API_BASE_URL
-            : ""
+          process.env.NODE_ENV === "production"
+            ? process.env.DB_PIBLIC_RENDER_BASE_URL
+            : process.env.NEXT_PUBLIC_API_BASE_URL
         }/api/auth/me`,
         {
           headers: {

@@ -8,9 +8,9 @@ export const fetchFilteredProducts = async (
   try {
     const res = await fetch(
       `${
-        process.env.NODE_ENV === "development"
-          ? process.env.NEXT_PUBLIC_API_BASE_URL
-          : ""
+        process.env.NODE_ENV === "production"
+          ? process.env.DB_PIBLIC_RENDER_BASE_URL
+          : process.env.NEXT_PUBLIC_API_BASE_URL
       }/api/products/filtered-products?categoryId=${categoryId}&offset=${offset}&limit=${limit}`,
       {
         method: "GET",
