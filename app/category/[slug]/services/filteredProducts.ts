@@ -7,7 +7,11 @@ export const fetchFilteredProducts = async (
 ) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products/filtered-products?categoryId=${categoryId}&offset=${offset}&limit=${limit}`,
+      `${
+        process.env.NODE_ENV === "development"
+          ? process.env.NEXT_PUBLIC_API_BASE_URL
+          : ""
+      }/api/products/filtered-products?categoryId=${categoryId}&offset=${offset}&limit=${limit}`,
       {
         method: "GET",
         headers: {
