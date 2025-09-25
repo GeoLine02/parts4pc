@@ -6,7 +6,7 @@ import { fetchProductCategories } from "./services/productCategories";
 
 export default async function Home() {
   const vipProductsData = await fetchVipProducts();
-
+  console.log(vipProductsData);
   const productCategoriesData = await fetchProductCategories();
 
   return (
