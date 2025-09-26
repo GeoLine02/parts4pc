@@ -25,7 +25,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const sequelize = isProduction
   ? new Sequelize(process.env.EXTERNAL_DATABASE_URL!, {
       dialect: "postgres",
-      dialectModule: require("pg")
+      dialectModule: require("pg"),
       dialectOptions: {
         ssl: {
           require: true,
