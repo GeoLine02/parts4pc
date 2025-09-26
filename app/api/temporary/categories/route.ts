@@ -1,4 +1,5 @@
 import ProductCategories from "@/models/productcategories";
+import { NextResponse } from "next/server";
 
 export async function POST() {
   try {
@@ -16,6 +17,8 @@ export async function POST() {
         categoryName: "CPU",
       },
     ]);
+
+    return NextResponse.json({ messag: "seed added" }, { status: 201 });
   } catch (error) {
     console.log(error);
   }
