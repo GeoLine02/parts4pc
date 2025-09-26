@@ -1,11 +1,12 @@
-import db from "@/models";
+import sequelize from "@/lib/sequelize";
+// import db from "@/models";
 import ProductCategories from "@/models/productcategories";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    db.sequelize.authenticate();
-
+    // db.sequelize.authenticate();
+    await sequelize.authenticate();
     const productCategories = await ProductCategories.findAll();
 
     return NextResponse.json(productCategories, {
