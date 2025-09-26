@@ -16,6 +16,8 @@ export const fetchVipProducts = async () => {
       }
     );
 
+    console.log("url: ", res.url);
+
     const data = await res.json();
 
     if (!res.ok) {
