@@ -5,6 +5,7 @@ import ProductStats from "./components/ProductStats";
 import SimilarProducts from "./components/SimilarProducts";
 import { fetchProductById } from "./services/productById";
 import { fetchSimilarProducts } from "./services/similarProducts";
+import ProductOwnerCard from "./components/ProductOwnerCard";
 
 interface ProductDetailsProps {
   params: Promise<{ slug: string }>;
@@ -19,6 +20,7 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
   const productByIdData: ProductDetailsType = await fetchProductById(
     parseInt(id)
   );
+
   const similarProductsData = await fetchSimilarProducts(
     productByIdData.productCategoryId
   );
@@ -28,14 +30,20 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
         <ProductImages />
         <div>
           <ProductStats
-            productName={productByIdData.productName}
-            productDescription={productByIdData.productDescription}
-            productPrice={productByIdData.productPrice}
-            productQuantity={productByIdData.productQuantity}
+            productName={productByIdData?.productName}
+            productDescription={productByIdData?.productDescription}
+            productPrice={productByIdData?.productPrice}
+            productQuantity={productByIdData?.productQuantity}
           />
           <AddToFavoritesBtn />
         </div>
       </div>
+      <ProductOwnerCard
+        owenrStatus={productByIdData?.owner.status}
+        firstName={productByIdData?.owner.firstName}
+        lastName={productByIdData?.owner.lastName}
+      />
+
       <SimilarProducts similarProducts={similarProductsData} />
     </div>
   );
