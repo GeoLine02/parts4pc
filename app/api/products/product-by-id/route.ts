@@ -1,4 +1,5 @@
 import Products from "@/models/products";
+import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -16,6 +17,10 @@ export async function GET(req: NextRequest) {
 
     const productById = await Products.findOne({
       where: { id: productId },
+      include: {
+        model: User,
+        as: "owner",
+      },
     });
 
     if (!productById)
