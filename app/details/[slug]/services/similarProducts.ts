@@ -1,0 +1,19 @@
+export const fetchSimilarProducts = async (categoryId: number) => {
+  try {
+    const res = await fetch(
+      `${
+        process.env.NODE_ENV === "production"
+          ? process.env.NEXT_PUBLIC_RENDER_BASE_URL
+          : process.env.NEXT_PUBLIC_API_BASE_URL
+      }/api/products/similar-products?categoryId=${categoryId}`
+    );
+
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error("Unable to fetch similar products");
+  }
+};

@@ -7,3 +7,9 @@ export interface ProductCardType {
   productDescription: string;
   productImage: StaticImageData;
 }
+
+export type ProductDetailsType = Omit<ProductCardType, "productImage"> & {
+  productCategoryId: number;
+  productOwnerId: number;
+  productQuantity: number;
+};

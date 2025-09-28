@@ -36,7 +36,7 @@ const Slider = <T,>({
   return (
     <section>
       <div className="flex justify-between items-center w-full mb-4">
-        <h1 className={`text-2xl font-orbitron text-warmGray`}>
+        <h1 className={`text-xl md:text-2xl font-orbitron text-warmGray`}>
           {sectionTitle}
         </h1>
         <div className="flex gap-4 items-center">

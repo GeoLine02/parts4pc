@@ -14,6 +14,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({
+  id,
   productName,
   productPrice,
   productDescription,
@@ -46,7 +47,7 @@ const ProductCard = ({
           <span className="text-xl font-bold text-green-600">
             ${productPrice.toFixed(2)}
           </span>
-          <Link href={"/"}>
+          <Link href={`/details/${productName}-${id}`}>
             <Button
               className="flex items-center justify-center gap-2 w-full md:w-auto"
               variant="primary"
