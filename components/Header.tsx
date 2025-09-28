@@ -29,22 +29,36 @@ const Header = () => {
         </div>
         <Logo />
         <ul className="w-full hidden items-center justify-between mx-auto max-w-[900px] md:flex">
-          <Link className="hover-transition hover:text-deepRed" href={"/parts"}>
+          <Link
+            className={`${
+              pathName.includes("/pc-parts") && "text-crimsonRed"
+            } hover-transition hover:text-deepRed`}
+            href={"/pc-parts"}
+          >
             PC Parts
           </Link>
           <Link
-            className="hover-transition hover:text-deepRed"
+            className={`${
+              pathName.includes("/prebuilds") && "text-crimsonRed"
+            } hover-transition hover:text-deepRed`}
             href={"/prebuilds"}
           >
             Prebuild PC&apos;s
           </Link>
           <Link
-            className="hover-transition hover:text-deepRed"
+            className={`${
+              pathName.includes("/your-orders") && "text-crimsonRed"
+            } hover-transition hover:text-deepRed`}
             href={"/your-orders"}
           >
             Your Orders
           </Link>
-          <Link className="hover-transition hover:text-deepRed" href={"/shop"}>
+          <Link
+            className={`${
+              pathName.includes("/shop") && "text-crimsonRed"
+            } hover-transition hover:text-deepRed`}
+            href={"/shop"}
+          >
             Shop
           </Link>
         </ul>

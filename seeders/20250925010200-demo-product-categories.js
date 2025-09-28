@@ -56,6 +56,11 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          categoryName: "PC Parts",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
