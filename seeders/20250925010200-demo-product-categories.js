@@ -61,6 +61,11 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          categoryName: "Prebuilds",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

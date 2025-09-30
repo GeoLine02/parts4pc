@@ -38,8 +38,8 @@ const ProductsList = ({
   };
 
   return (
-    <div>
-      <div className="flex flex-wrap gap-4 justify-center">
+    <>
+      <div className="flex flex-wrap gap-4">
         {products?.map((product) => (
           <ProductCard
             key={product.id}
@@ -55,7 +55,7 @@ const ProductsList = ({
         isLoading={loading}
         fetchMoreProducts={fetchMoreProducts}
       />
-    </div>
+    </>
   );
 };
 
