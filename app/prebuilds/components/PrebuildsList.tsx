@@ -14,7 +14,7 @@ interface PrebuildsProps {
 const PrebuildsList = ({ prebuildsData }: PrebuildsProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [prebuilds, setPrebuilds] = useState(prebuildsData);
-  const offset = prebuilds.length;
+  const offset = prebuilds?.length;
 
   const fetchMorePreubilds = async () => {
     setLoading(true);
@@ -31,7 +31,7 @@ const PrebuildsList = ({ prebuildsData }: PrebuildsProps) => {
   return (
     <>
       <div className="flex flex-wrap gap-4 ">
-        {prebuilds.map((prebuild) => (
+        {prebuilds?.map((prebuild) => (
           <ProductCard
             id={prebuild.id}
             productDescription=""
