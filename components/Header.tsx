@@ -9,7 +9,7 @@ import { toggleSideBar } from "@/store/features/sideBarSlice";
 import { usePathname } from "next/navigation";
 
 const Header = () => {
-  const token = true;
+  const token = false; // replace with real auth state
   const dispatch = useDispatch();
   const pathName = usePathname();
 
@@ -17,58 +17,84 @@ const Header = () => {
     dispatch(toggleSideBar());
   };
 
+  // hide header on auth pages
   if (pathName.includes("signin") || pathName.includes("signup")) {
     return null;
   }
 
   return (
-    <header className="bg-jetBlack text-warmGray font-orbitron container py-4 w-[75%] !mx-0 md:w-full md:!mx-auto px-4">
-      <nav className="flex items-center justify-between w-full">
+    <header className="bg-jetBlack text-warmGray font-orbitron w-full px-4 py-3 shadow-md">
+      <nav className="flex items-center justify-between container mx-auto relative">
+        {/* Left (Menu button only on mobile) */}
         <div className="md:hidden">
-          <Menu onClick={onOpenMenu} className="hover:text-deepRed" size={25} />
+          <Menu
+            onClick={onOpenMenu}
+            className="hover:text-crimsonRed cursor-pointer"
+            size={28}
+          />
         </div>
-        <Logo />
-        <ul className="w-full hidden items-center justify-between mx-auto max-w-[900px] md:flex">
+
+        {/* Center Logo */}
+        <div className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+          <Logo />
+        </div>
+
+        {/* Desktop Nav Links */}
+        <ul className="hidden md:flex items-center gap-8 text-sm xl:text-base font-medium mx-auto">
           <Link
             className={`${
               pathName.includes("/pc-parts") && "text-crimsonRed"
-            } hover-transition hover:text-deepRed`}
-            href={"/pc-parts"}
+            } hover:text-deepRed hover-transition`}
+            href="/pc-parts"
           >
             PC Parts
           </Link>
           <Link
             className={`${
               pathName.includes("/prebuilds") && "text-crimsonRed"
-            } hover-transition hover:text-deepRed`}
-            href={"/prebuilds"}
+            } hover:text-deepRed hover-transition`}
+            href="/prebuilds"
           >
-            Prebuild PC&apos;s
+            Prebuilt PCs
+          </Link>
+          <Link
+            className={`${
+              pathName.includes("/wishlist") && "text-crimsonRed"
+            } hover:text-deepRed hover-transition`}
+            href="/wishlist"
+          >
+            Wishlist
           </Link>
           <Link
             className={`${
               pathName.includes("/your-orders") && "text-crimsonRed"
-            } hover-transition hover:text-deepRed`}
-            href={"/your-orders"}
+            } hover:text-deepRed hover-transition`}
+            href="/your-orders"
           >
             Your Orders
           </Link>
           <Link
             className={`${
               pathName.includes("/shop") && "text-crimsonRed"
-            } hover-transition hover:text-deepRed`}
-            href={"/shop"}
+            } hover:text-deepRed hover-transition`}
+            href="/shop"
           >
             Shop
           </Link>
         </ul>
-        {token && (
-          <Link href="/signin">
-            <Button className="hidden md:block" variant="primary">
-              Sign in
-            </Button>
-          </Link>
-        )}
+
+        {/* Right (Sign in / Profile) */}
+        <div className="hidden md:block">
+          {!token ? (
+            <Link href="/signin">
+              <Button variant="primary">Sign in</Button>
+            </Link>
+          ) : (
+            <Link href="/profile">
+              <Button variant="secondary">Profile</Button>
+            </Link>
+          )}
+        </div>
       </nav>
     </header>
   );

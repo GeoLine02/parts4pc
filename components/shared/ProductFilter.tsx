@@ -20,7 +20,7 @@ const FilterCard = ({ filterImage, label, id }: FilterCardProps) => {
   return (
     <Link
       href={`/category/${label}-${id}`}
-      className="w-[225px] min-w-[225px] rounded-md bg-darkGray flex items-center gap-4 justify-center cursor-pointer p-4"
+      className="w-[225px] min-w-[225px] rounded-md bg-darkGray flex items-center gap-4 justify-center cursor-pointer p-2 md:p-4"
     >
       <Image
         alt={`filter products by ${label}`}
